@@ -240,6 +240,12 @@ h5 { font-size: 0.9rem;   font-weight: 500; }
     border-bottom: 1px solid var(--border-subtle);
     font-size: 0.875rem;
     vertical-align: middle;
+    color: #fff !important;
+}
+.table-glass tbody td small, 
+.table-glass tbody td .text-muted,
+.table-glass tbody td .small {
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 .table-glass tbody tr:hover td {
     background: rgba(255, 255, 255, 0.03);
