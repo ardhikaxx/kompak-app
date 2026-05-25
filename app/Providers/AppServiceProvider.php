@@ -20,6 +20,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrapFive();
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
+
+        \Illuminate\Support\Facades\View::composer('*', function ($view) {
+            if (auth()->check()) {
+                $stokRendahItems = \App\Models\Produk::where('stok', '<=', \Illuminate\Support\Facades\DB::raw('stok_minimum'))
+                    ->where('is_active', true)
+                    ->orderBy('stok', 'asc')
+                    ->limit(5)
+                    ->get();
+                $stokRendahCount = \App\Models\Produk::where('stok', '<=', \Illuminate\Support\Facades\DB::raw('stok_minimum'))
+                    ->where('is_active', true)
+                    ->count();
+                
+                $view->with('stokRendahCount', $stokRendahCount);
+                $view->with('stokRendahItems', $stokRendahItems);
+            } else {
+                $view->with('stokRendahCount', 0);
+                $view->with('stokRendahItems', collect());
+            }
+        });
     }
 }

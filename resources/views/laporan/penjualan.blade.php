@@ -30,8 +30,17 @@
             <button type="submit" class="btn-glass-primary mt-4">
                 <i class="fas fa-filter me-1"></i> Terapkan Filter
             </button>
+            <div class="btn-group mt-4 ms-2">
+                <button type="button" class="btn-glass-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-download me-1"></i> Ekspor Laporan
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark glass-card border-0 shadow" style="background: rgba(10, 22, 40, 0.95); backdrop-filter: blur(20px);">
+                    <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['export' => 'pdf']) }}"><i class="fas fa-file-pdf me-2 text-danger"></i> Unduh PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['export' => 'excel']) }}"><i class="fas fa-file-excel me-2 text-success"></i> Unduh Excel</a></li>
+                </ul>
+            </div>
             <button type="button" class="btn-glass-secondary mt-4 ms-2" onclick="window.print()">
-                <i class="fas fa-print me-1"></i> Cetak PDF
+                <i class="fas fa-print me-1"></i> Cetak Cepat
             </button>
         </div>
     </form>
