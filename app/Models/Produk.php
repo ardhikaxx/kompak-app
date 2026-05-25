@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produk extends Model
 {
@@ -19,4 +21,19 @@ class Produk extends Model
         'foto',
         'is_active',
     ];
+
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
+    public function stokLogs(): HasMany
+    {
+        return $this->hasMany(StokLog::class);
+    }
+
+    public function detailTransaksis(): HasMany
+    {
+        return $this->hasMany(DetailTransaksi::class);
+    }
 }
