@@ -57,44 +57,37 @@ class DatabaseSeeder extends Seeder
             $katModels[$nama] = Kategori::create(['nama_kategori' => $nama, 'deskripsi' => $desc]);
         }
 
-        // 4. Produk (30+ Produk)
+        // 4. Produk
         $produkData = [
-            ['kat' => 'Sembako', 'kd' => 'BRS-5', 'nm' => 'Beras Rojolele 5kg', 'hb' => 65000, 'hj' => 75000, 'st' => 30, 'sm' => 5, 'sat' => 'Karung'],
-            ['kat' => 'Sembako', 'kd' => 'MYK-2L', 'nm' => 'Minyak Bimoli 2L', 'hb' => 32000, 'hj' => 38000, 'st' => 20, 'sm' => 4, 'sat' => 'Pouch'],
-            ['kat' => 'Sembako', 'kd' => 'GLA-1', 'nm' => 'Gula Pasir Gulaku 1kg', 'hb' => 14000, 'hj' => 17000, 'st' => 50, 'sm' => 10, 'sat' => 'Bks'],
-            ['kat' => 'Sembako', 'kd' => 'TLR-1', 'nm' => 'Telur Ayam 1kg', 'hb' => 24000, 'hj' => 28000, 'st' => 100, 'sm' => 15, 'sat' => 'Kg'],
-            
-            ['kat' => 'Minuman', 'kd' => 'AQ-600', 'nm' => 'Aqua 600ml', 'hb' => 2800, 'hj' => 4500, 'st' => 120, 'sm' => 24, 'sat' => 'Botol'],
-            ['kat' => 'Minuman', 'kd' => 'TP-350', 'nm' => 'Teh Pucuk 350ml', 'hb' => 2500, 'hj' => 4000, 'st' => 48, 'sm' => 12, 'sat' => 'Botol'],
-            ['kat' => 'Minuman', 'kd' => 'CC-250', 'nm' => 'Coca Cola 250ml', 'hb' => 4500, 'hj' => 6000, 'st' => 24, 'sm' => 6, 'sat' => 'Kaleng'],
-            ['kat' => 'Minuman', 'kd' => 'SDA-1', 'nm' => 'Susu Beruang (Bear Brand)', 'hb' => 9000, 'hj' => 11500, 'st' => 36, 'sm' => 12, 'sat' => 'Kaleng'],
-
-            ['kat' => 'Makanan Ringan', 'kd' => 'CHT-68', 'nm' => 'Chitato 68g', 'hb' => 9000, 'hj' => 12500, 'st' => 20, 'sm' => 5, 'sat' => 'Bks'],
-            ['kat' => 'Makanan Ringan', 'kd' => 'OR-137', 'nm' => 'Oreo 137g', 'hb' => 7500, 'hj' => 10000, 'st' => 15, 'sm' => 5, 'sat' => 'Bks'],
-            ['kat' => 'Makanan Ringan', 'kd' => 'GR-S', 'nm' => 'Garuda Kacang Atom', 'hb' => 6000, 'hj' => 8500, 'st' => 30, 'sm' => 5, 'sat' => 'Bks'],
-            ['kat' => 'Makanan Ringan', 'kd' => 'QT-L', 'nm' => 'Qtela Singkong 185g', 'hb' => 12000, 'hj' => 15000, 'st' => 12, 'sm' => 4, 'sat' => 'Bks'],
-
-            ['kat' => 'Perawatan Tubuh', 'kd' => 'LB-M', 'nm' => 'Lifebuoy Merah 110g', 'hb' => 3800, 'hj' => 5500, 'st' => 48, 'sm' => 12, 'sat' => 'Pcs'],
-            ['kat' => 'Perawatan Tubuh', 'kd' => 'CL-S', 'nm' => 'Clear Sampo 160ml', 'hb' => 22000, 'hj' => 28000, 'st' => 10, 'sm' => 3, 'sat' => 'Botol'],
-            ['kat' => 'Perawatan Tubuh', 'kd' => 'PS-190', 'nm' => 'Pepsodent 190g', 'hb' => 11000, 'hj' => 14500, 'st' => 20, 'sm' => 5, 'sat' => 'Pcs'],
-            ['kat' => 'Perawatan Tubuh', 'kd' => 'RX-W', 'nm' => 'Rexona Men Roll-On', 'hb' => 16500, 'hj' => 21000, 'st' => 8, 'sm' => 2, 'sat' => 'Pcs'],
-
-            ['kat' => 'Kebutuhan Rumah', 'kd' => 'RN-800', 'nm' => 'Rinso Molto 800g', 'hb' => 24000, 'hj' => 29000, 'st' => 15, 'sm' => 5, 'sat' => 'Bks'],
-            ['kat' => 'Kebutuhan Rumah', 'kd' => 'SL-755', 'nm' => 'Sunlight Jeruk Nipis', 'hb' => 13500, 'hj' => 17000, 'st' => 20, 'sm' => 5, 'sat' => 'Pouch'],
-            ['kat' => 'Kebutuhan Rumah', 'kd' => 'WP-750', 'nm' => 'Wipol Karbol 750ml', 'hb' => 15000, 'hj' => 19000, 'st' => 10, 'sm' => 3, 'sat' => 'Pouch'],
-
-            ['kat' => 'Alat Tulis', 'kd' => 'SN-01', 'nm' => 'Pulpen Snowman Black', 'hb' => 2500, 'hj' => 4000, 'st' => 50, 'sm' => 12, 'sat' => 'Pcs'],
-            ['kat' => 'Alat Tulis', 'kd' => 'SK-A4', 'nm' => 'Kertas A4 Sinar Dunia', 'hb' => 48000, 'hj' => 55000, 'st' => 5, 'sm' => 2, 'sat' => 'Rim'],
-            ['kat' => 'Alat Tulis', 'kd' => 'BK-Q', 'nm' => 'Buku Tulis Kiky 38lbr', 'hb' => 3500, 'hj' => 5500, 'st' => 40, 'sm' => 10, 'sat' => 'Pcs'],
-
-            ['kat' => 'Obat-obatan', 'kd' => 'PN-500', 'nm' => 'Panadol Biru 10s', 'hb' => 9500, 'hj' => 12000, 'st' => 20, 'sm' => 5, 'sat' => 'Strip'],
-            ['kat' => 'Obat-obatan', 'kd' => 'TLG-A', 'nm' => 'Tolak Angin Cair', 'hb' => 3200, 'hj' => 4500, 'st' => 60, 'sm' => 12, 'sat' => 'Sachet'],
-            ['kat' => 'Obat-obatan', 'kd' => 'HPS-5', 'nm' => 'Hansaplast Plester 10s', 'hb' => 5500, 'hj' => 8000, 'st' => 15, 'sm' => 5, 'sat' => 'Box'],
-
-            ['kat' => 'Bumbu Dapur', 'kd' => 'G-R', 'nm' => 'Garam Cap Kapal 250g', 'hb' => 2000, 'hj' => 3500, 'st' => 40, 'sm' => 10, 'sat' => 'Bks'],
-            ['kat' => 'Bumbu Dapur', 'kd' => 'K-B', 'nm' => 'Kecap Bango 550ml', 'hb' => 22000, 'hj' => 26000, 'st' => 12, 'sm' => 4, 'sat' => 'Pouch'],
-            ['kat' => 'Bumbu Dapur', 'kd' => 'S-T', 'nm' => 'Sasa Santan Kelapa', 'hb' => 2800, 'hj' => 4000, 'st' => 48, 'sm' => 12, 'sat' => 'Pcs'],
-            ['kat' => 'Bumbu Dapur', 'kd' => 'AJI-S', 'nm' => 'Ajinomoto 100g', 'hb' => 4500, 'hj' => 6000, 'st' => 30, 'sm' => 10, 'sat' => 'Bks'],
+            ['kat' => 'Sembako', 'kd' => 'BRS-5', 'nm' => 'Beras Rojolele 5kg', 'hb' => 65000, 'hj' => 78000, 'st' => 50, 'sm' => 5, 'sat' => 'Karung'],
+            ['kat' => 'Sembako', 'kd' => 'MYK-2L', 'nm' => 'Minyak Bimoli 2L', 'hb' => 32000, 'hj' => 42000, 'st' => 40, 'sm' => 4, 'sat' => 'Pouch'],
+            ['kat' => 'Sembako', 'kd' => 'GLA-1', 'nm' => 'Gula Pasir Gulaku 1kg', 'hb' => 14000, 'hj' => 18500, 'st' => 60, 'sm' => 10, 'sat' => 'Bks'],
+            ['kat' => 'Sembako', 'kd' => 'TLR-1', 'nm' => 'Telur Ayam 1kg', 'hb' => 24000, 'hj' => 30000, 'st' => 100, 'sm' => 15, 'sat' => 'Kg'],
+            ['kat' => 'Minuman', 'kd' => 'AQ-600', 'nm' => 'Aqua 600ml', 'hb' => 2800, 'hj' => 5000, 'st' => 120, 'sm' => 24, 'sat' => 'Botol'],
+            ['kat' => 'Minuman', 'kd' => 'TP-350', 'nm' => 'Teh Pucuk 350ml', 'hb' => 2500, 'hj' => 4500, 'st' => 80, 'sm' => 12, 'sat' => 'Botol'],
+            ['kat' => 'Minuman', 'kd' => 'CC-250', 'nm' => 'Coca Cola 250ml', 'hb' => 4500, 'hj' => 7000, 'st' => 48, 'sm' => 6, 'sat' => 'Kaleng'],
+            ['kat' => 'Minuman', 'kd' => 'SDA-1', 'nm' => 'Susu Beruang (Bear Brand)', 'hb' => 9000, 'hj' => 12500, 'st' => 60, 'sm' => 12, 'sat' => 'Kaleng'],
+            ['kat' => 'Makanan Ringan', 'kd' => 'CHT-68', 'nm' => 'Chitato 68g', 'hb' => 9000, 'hj' => 13500, 'st' => 40, 'sm' => 5, 'sat' => 'Bks'],
+            ['kat' => 'Makanan Ringan', 'kd' => 'OR-137', 'nm' => 'Oreo 137g', 'hb' => 7500, 'hj' => 11000, 'st' => 40, 'sm' => 5, 'sat' => 'Bks'],
+            ['kat' => 'Makanan Ringan', 'kd' => 'GR-S', 'nm' => 'Garuda Kacang Atom', 'hb' => 6000, 'hj' => 9500, 'st' => 50, 'sm' => 5, 'sat' => 'Bks'],
+            ['kat' => 'Makanan Ringan', 'kd' => 'QT-L', 'nm' => 'Qtela Singkong 185g', 'hb' => 12000, 'hj' => 16500, 'st' => 30, 'sm' => 4, 'sat' => 'Bks'],
+            ['kat' => 'Perawatan Tubuh', 'kd' => 'LB-M', 'nm' => 'Lifebuoy Merah 110g', 'hb' => 3800, 'hj' => 6000, 'st' => 60, 'sm' => 12, 'sat' => 'Pcs'],
+            ['kat' => 'Perawatan Tubuh', 'kd' => 'CL-S', 'nm' => 'Clear Sampo 160ml', 'hb' => 22000, 'hj' => 30000, 'st' => 24, 'sm' => 3, 'sat' => 'Botol'],
+            ['kat' => 'Perawatan Tubuh', 'kd' => 'PS-190', 'nm' => 'Pepsodent 190g', 'hb' => 11000, 'hj' => 16000, 'st' => 40, 'sm' => 5, 'sat' => 'Pcs'],
+            ['kat' => 'Perawatan Tubuh', 'kd' => 'RX-W', 'nm' => 'Rexona Men Roll-On', 'hb' => 16500, 'hj' => 23000, 'st' => 20, 'sm' => 2, 'sat' => 'Pcs'],
+            ['kat' => 'Kebutuhan Rumah', 'kd' => 'RN-800', 'nm' => 'Rinso Molto 800g', 'hb' => 24000, 'hj' => 32000, 'st' => 30, 'sm' => 5, 'sat' => 'Bks'],
+            ['kat' => 'Kebutuhan Rumah', 'kd' => 'SL-755', 'nm' => 'Sunlight Jeruk Nipis', 'hb' => 13500, 'hj' => 18500, 'st' => 40, 'sm' => 5, 'sat' => 'Pouch'],
+            ['kat' => 'Kebutuhan Rumah', 'kd' => 'WP-750', 'nm' => 'Wipol Karbol 750ml', 'hb' => 15000, 'hj' => 21000, 'st' => 24, 'sm' => 3, 'sat' => 'Pouch'],
+            ['kat' => 'Alat Tulis', 'kd' => 'SN-01', 'nm' => 'Pulpen Snowman Black', 'hb' => 2500, 'hj' => 5000, 'st' => 100, 'sm' => 12, 'sat' => 'Pcs'],
+            ['kat' => 'Alat Tulis', 'kd' => 'SK-A4', 'nm' => 'Kertas A4 Sinar Dunia', 'hb' => 48000, 'hj' => 58000, 'st' => 20, 'sm' => 2, 'sat' => 'Rim'],
+            ['kat' => 'Alat Tulis', 'kd' => 'BK-Q', 'nm' => 'Buku Tulis Kiky 38lbr', 'hb' => 3500, 'hj' => 6000, 'st' => 100, 'sm' => 10, 'sat' => 'Pcs'],
+            ['kat' => 'Obat-obatan', 'kd' => 'PN-500', 'nm' => 'Panadol Biru 10s', 'hb' => 9500, 'hj' => 14000, 'st' => 40, 'sm' => 5, 'sat' => 'Strip'],
+            ['kat' => 'Obat-obatan', 'kd' => 'TLG-A', 'nm' => 'Tolak Angin Cair', 'hb' => 3200, 'hj' => 5000, 'st' => 120, 'sm' => 12, 'sat' => 'Sachet'],
+            ['kat' => 'Obat-obatan', 'kd' => 'HPS-5', 'nm' => 'Hansaplast Plester 10s', 'hb' => 5500, 'hj' => 9000, 'st' => 40, 'sm' => 5, 'sat' => 'Box'],
+            ['kat' => 'Bumbu Dapur', 'kd' => 'G-R', 'nm' => 'Garam Cap Kapal 250g', 'hb' => 2000, 'hj' => 4000, 'st' => 80, 'sm' => 10, 'sat' => 'Bks'],
+            ['kat' => 'Bumbu Dapur', 'kd' => 'K-B', 'nm' => 'Kecap Bango 550ml', 'hb' => 22000, 'hj' => 29000, 'st' => 30, 'sm' => 4, 'sat' => 'Pouch'],
+            ['kat' => 'Bumbu Dapur', 'kd' => 'S-T', 'nm' => 'Sasa Santan Kelapa', 'hb' => 2800, 'hj' => 4500, 'st' => 100, 'sm' => 12, 'sat' => 'Pcs'],
+            ['kat' => 'Bumbu Dapur', 'kd' => 'AJI-S', 'nm' => 'Ajinomoto 100g', 'hb' => 4500, 'hj' => 7500, 'st' => 60, 'sm' => 10, 'sat' => 'Bks'],
         ];
 
         $produkModels = [];
@@ -123,15 +116,12 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // 5. Suppliers (7 Supplier)
+        // 5. Suppliers
         $suppliers = [
             ['nm' => 'PT Indomarco Adi Prima', 'kd' => 'SUP-001', 'pic' => 'Bapak Joko', 'tlp' => '021-55667788', 'alm' => 'Jababeka, Bekasi', 'h' => 85, 'k' => 90, 'p' => 80, 's' => 95],
             ['nm' => 'Grosir Sumber Makmur', 'kd' => 'SUP-002', 'pic' => 'Ibu Lani', 'tlp' => '081299001122', 'alm' => 'Pasar Induk Kramat Jati', 'h' => 95, 'k' => 75, 'p' => 85, 's' => 70],
             ['nm' => 'Distributor Wings Sayap', 'kd' => 'SUP-003', 'pic' => 'Bapak Hendra', 'tlp' => '021-88776655', 'alm' => 'Cakung, Jakarta Utara', 'h' => 88, 'k' => 85, 'p' => 90, 's' => 88],
-            ['nm' => 'Cahaya ATK Grosir', 'kd' => 'SUP-004', 'pic' => 'Ibu Maya', 'tlp' => '087811223344', 'alm' => 'Mangga Dua, Jakarta', 'h' => 92, 'k' => 80, 'p' => 70, 's' => 75],
-            ['nm' => 'Agen Sembako Berkah', 'kd' => 'SUP-005', 'pic' => 'Haji Mansur', 'tlp' => '081344556677', 'alm' => 'Tanah Abang, Jakarta', 'h' => 98, 'k' => 70, 'p' => 75, 's' => 60],
             ['nm' => 'PT Unilever Indonesia Tbk', 'kd' => 'SUP-006', 'pic' => 'Bapak Kevin', 'tlp' => '021-33221100', 'alm' => 'BSD City, Tangerang', 'h' => 75, 'k' => 98, 'p' => 95, 's' => 98],
-            ['nm' => 'Grosir Plastik Maju', 'kd' => 'SUP-007', 'pic' => 'Bapak Adi', 'tlp' => '085212345678', 'alm' => 'Senen, Jakarta Pusat', 'h' => 90, 'k' => 82, 'p' => 88, 's' => 80],
         ];
 
         foreach ($suppliers as $s) {
@@ -141,8 +131,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // 6. Pelanggan (15 Pelanggan)
-        $namaPelanggan = ['Andi Wijaya', 'Budi Santoso', 'Cici Lestari', 'Dedi Kurniawan', 'Eka Saputra', 'Fanny Amelia', 'Gani Ramadhan', 'Hani Fitria', 'Iwan Setiawan', 'Julia Putri', 'Kevin Sanjaya', 'Lina Marlina', 'Maman Suherman', 'Nina Zatulini', 'Oscar Lawalata'];
+        // 6. Pelanggan
+        $namaPelanggan = ['Andi Wijaya', 'Budi Santoso', 'Cici Lestari', 'Dedi Kurniawan', 'Eka Saputra', 'Fanny Amelia', 'Gani Ramadhan', 'Hani Fitria', 'Iwan Setiawan', 'Julia Putri'];
         $pelangganModels = [];
         foreach ($namaPelanggan as $idx => $name) {
             $pelangganModels[] = Pelanggan::create([
@@ -154,16 +144,15 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // 7. Transaksi & Detail (Simulasi 30 hari terakhir, rata-rata 3-5 transaksi per hari)
+        // 7. Transaksi (Dibuat menguntungkan: 6-12 transaksi per hari)
         for ($day = 30; $day >= 0; $day--) {
-            $numTrx = rand(2, 5);
+            $numTrx = rand(6, 12);
             for ($t = 1; $t <= $numTrx; $t++) {
                 $date = Carbon::today()->subDays($day)->addHours(rand(8, 21))->addMinutes(rand(0, 59));
                 $pelanggan = (rand(0, 10) > 3) ? $pelangganModels[array_rand($pelangganModels)] : null;
                 $user = (rand(0, 1) == 0) ? $kasir1 : $kasir2;
 
-                // Pilih 1-4 produk acak
-                $numItems = rand(1, 4);
+                $numItems = rand(3, 8);
                 $selectedItems = array_rand($produkModels, $numItems);
                 if (!is_array($selectedItems)) $selectedItems = [$selectedItems];
 
@@ -205,23 +194,20 @@ class DatabaseSeeder extends Seeder
                         'jumlah' => $li['q'],
                         'subtotal' => $li['st']
                     ]);
-                    // Jangan kurangi stok di seeder agar stok awal tetap terjaga untuk demo tampilan
                 }
 
                 if ($pelanggan) $pelanggan->increment('total_transaksi', $total);
-
-                Keuangan::create(['jenis' => 'masuk', 'kategori' => 'Penjualan', 'jumlah' => $total, 'tanggal' => $date, 'keterangan' => 'Retail ' . $trx->kode_transaksi, 'user_id' => $user->id]);
+                Keuangan::create(['jenis' => 'masuk', 'kategori' => 'Penjualan', 'jumlah' => $total, 'tanggal' => $date, 'keterangan' => 'Penjualan Retail', 'user_id' => $user->id]);
             }
         }
 
-        // 8. Keuangan Pengeluaran (Gaji, Listrik, Sewa)
-        $bulanLalu = Carbon::now()->subMonth();
-        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Sewa', 'jumlah' => 2000000, 'tanggal' => $bulanLalu->startOfMonth(), 'keterangan' => 'Sewa ruko bulan ini', 'user_id' => $admin->id]);
-        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Gaji', 'jumlah' => 1500000, 'tanggal' => $bulanLalu->endOfMonth(), 'keterangan' => 'Gaji Agus Kasir', 'user_id' => $admin->id]);
-        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Gaji', 'jumlah' => 1500000, 'tanggal' => $bulanLalu->endOfMonth(), 'keterangan' => 'Gaji Sari Pegawai', 'user_id' => $admin->id]);
-        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Operasional', 'jumlah' => 450000, 'tanggal' => Carbon::today()->subDays(10), 'keterangan' => 'Bayar tagihan listrik & air', 'user_id' => $admin->id]);
+        // 8. Keuangan Pengeluaran (Disesuaikan agar profit masuk akal)
+        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Sewa', 'jumlah' => 1200000, 'tanggal' => Carbon::now()->startOfMonth(), 'keterangan' => 'Sewa ruko', 'user_id' => $admin->id]);
+        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Gaji', 'jumlah' => 1000000, 'tanggal' => Carbon::now()->subMonth()->endOfMonth(), 'keterangan' => 'Gaji Agus', 'user_id' => $admin->id]);
+        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Gaji', 'jumlah' => 1000000, 'tanggal' => Carbon::now()->subMonth()->endOfMonth(), 'keterangan' => 'Gaji Sari', 'user_id' => $admin->id]);
+        Keuangan::create(['jenis' => 'keluar', 'kategori' => 'Operasional', 'jumlah' => 350000, 'tanggal' => Carbon::today()->subDays(10), 'keterangan' => 'Listrik & Air', 'user_id' => $admin->id]);
 
-        // 9. SPK Kriteria (Real-weight)
+        // 9. SPK Kriteria
         SpkKriteria::insert([
             ['nama_kriteria' => 'Harga', 'bobot' => 0.35, 'tipe' => 'min', 'fungsi_preferensi' => 'linear', 'p_parameter' => 20, 'q_parameter' => 5],
             ['nama_kriteria' => 'Kualitas', 'bobot' => 0.30, 'tipe' => 'max', 'fungsi_preferensi' => 'usual', 'p_parameter' => null, 'q_parameter' => null],
