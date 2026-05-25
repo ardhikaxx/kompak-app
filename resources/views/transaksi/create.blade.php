@@ -20,9 +20,9 @@
 <form action="{{ route('transaksi.store') }}" method="POST" id="form-transaksi">
     @csrf
     <input type="hidden" name="kode_transaksi" value="{{ $kodeTransaksi }}">
-    <div class="row g-4" style="height: calc(100vh - 200px); min-height: 500px;">
+    <div class="row g-4 align-items-start">
         <!-- Kiri: Pilih Produk -->
-        <div class="col-lg-7 h-100">
+        <div class="col-lg-7" style="height: calc(100vh - 200px); min-height: 550px;">
             <div class="glass-card p-4 h-100 d-flex flex-column">
                 <h5 class="text-white mb-4">Pilih Produk</h5>
                 
@@ -47,8 +47,8 @@
         </div>
 
         <!-- Kanan: Keranjang & Pembayaran -->
-        <div class="col-lg-5 h-100">
-            <div class="glass-card p-4 d-flex flex-column h-100">
+        <div class="col-lg-5">
+            <div class="glass-card p-4 d-flex flex-column" style="max-height: calc(100vh - 200px); min-height: 550px;">
                 <h5 class="text-white mb-3">Detail Transaksi</h5>
                 
                 <div class="mb-3">
@@ -60,7 +60,7 @@
                     </select>
                 </div>
 
-                <div class="flex-grow-1 mb-4" style="min-height: 250px; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1rem;">
+                <div class="mb-4 flex-grow-1" style="overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1rem;">
                     <div id="keranjang-kosong" class="text-center text-white py-5">
                         <i class="fas fa-shopping-basket fa-3x mb-3"></i>
                         <p>Keranjang masih kosong</p>
