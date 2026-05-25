@@ -45,7 +45,7 @@
                                  onclick="tambahKeKeranjang({{ $produk->id }}, '{{ $produk->nama_produk }}', {{ $produk->harga_jual }}, {{ $produk->stok }})">
                                 
                                 @if($produk->stok <= 0)
-                                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.6); z-index: 2;">
+                                    <div class="position-absolute top-0 inset-s-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.6); z-index: 2;">
                                         <span class="badge bg-danger">HABIS</span>
                                     </div>
                                 @endif
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Scrollable Cart Area -->
-                <div class="flex-grow-1 mb-2" style="min-height: 200px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
+                <div class="grow mb-2" style="min-height: 200px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
                     <div id="keranjang-kosong" class="text-center text-white py-4">
                         <i class="fas fa-shopping-basket fa-2x mb-2 opacity-50"></i>
                         <p class="small mb-0">Keranjang masih kosong</p>
@@ -122,7 +122,7 @@
                     
                     <div class="mb-2">
                         <label class="form-glass-label mb-1" style="font-size: 0.6rem;">NOMINAL BAYAR</label>
-                        <input type="number" name="bayar" id="input-bayar" class="form-glass fw-bold text-end text-accent" style="height: 40px; font-size: 1.25rem;" placeholder="0" required min="0" oninput="hitungKembalian()">
+                        <input type="text" name="bayar" id="input-bayar" class="form-glass fw-bold text-end text-accent" style="height: 40px; font-size: 1.25rem;" placeholder="0" required oninput="formatNominal(this)">
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center p-2 rounded" style="background: rgba(34, 197, 94, 0.1);">
@@ -173,7 +173,14 @@
     });
 
     function formatRupiah(angka) {
+        if (!angka && angka !== 0) return '';
         return new Intl.NumberFormat('id-ID').format(angka);
+    }
+
+    function formatNominal(input) {
+        let value = input.value.replace(/[^0-9]/g, '');
+        input.value = formatRupiah(value);
+        hitungKembalian();
     }
 
     function tambahKeKeranjang(id, nama, harga, stokMax) {
@@ -269,7 +276,8 @@
 
     function hitungKembalian() {
         let total = parseInt(document.getElementById('lbl-total').dataset.val) || 0;
-        let bayar = parseInt(document.getElementById('input-bayar').value) || 0;
+        let bayarStr = document.getElementById('input-bayar').value.replace(/\./g, '') || '0';
+        let bayar = parseInt(bayarStr);
         
         let kembalian = bayar - total;
         let lblKembalian = document.getElementById('lbl-kembalian');
@@ -290,7 +298,8 @@
         }
         
         let total = parseInt(document.getElementById('lbl-total').dataset.val) || 0;
-        let bayar = parseInt(document.getElementById('input-bayar').value) || 0;
+        let bayarStr = document.getElementById('input-bayar').value.replace(/\./g, '') || '0';
+        let bayar = parseInt(bayarStr);
         
         if(bayar < total) {
             alertError('Nominal pembayaran kurang dari total tagihan!');
@@ -316,6 +325,8 @@
             customClass: { popup: 'swal-glassmorphism' }
         }).then((result) => {
             if (result.isConfirmed) {
+                // Bersihkan titik sebelum submit ke backend
+                document.getElementById('input-bayar').value = bayar;
                 document.getElementById('form-transaksi').submit();
             }
         });

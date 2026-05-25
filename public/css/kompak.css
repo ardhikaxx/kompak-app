@@ -668,3 +668,15 @@ h5 { font-size: 0.9rem;   font-weight: 500; }
     color: #fff !important;
     opacity: 1 !important;
 }
+
+/* Hide Spin Buttons in Number Inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
