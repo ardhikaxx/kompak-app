@@ -61,8 +61,8 @@
                 </div>
 
                 <div class="flex-grow-1 mb-4" style="min-height: 250px; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1rem;">
-                    <div id="keranjang-kosong" class="text-center text-muted py-5">
-                        <i class="fas fa-shopping-basket fa-3x mb-3 opacity-50"></i>
+                    <div id="keranjang-kosong" class="text-center text-white py-5">
+                        <i class="fas fa-shopping-basket fa-3x mb-3"></i>
                         <p>Keranjang masih kosong</p>
                     </div>
                     <table class="table-glass w-100" id="tabel-keranjang" style="display:none;">

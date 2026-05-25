@@ -653,3 +653,12 @@ h5 { font-size: 0.9rem;   font-weight: 500; }
     animation: shimmer 1.5s infinite;
     border-radius: var(--radius-md);
 }
+
+/* Empty State Styling */
+.empty-state {
+    color: #fff !important;
+}
+.empty-state i, .empty-state .fas, .empty-state .far {
+    color: #fff !important;
+    opacity: 1 !important;
+}

@@ -125,7 +125,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="text-center py-3 text-muted">Belum ada riwayat mutasi stok.</td>
+                            <td colspan="5" class="text-center py-3 text-white">Belum ada riwayat mutasi stok.</td>
                         </tr>
                         @endforelse
                     </tbody>

@@ -104,7 +104,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">Belum ada data keuangan untuk periode ini.</td>
+                            <td colspan="4" class="text-center py-4 text-white">Belum ada data keuangan untuk periode ini.</td>
                         </tr>
                         @endforelse
                     </tbody>

@@ -79,7 +79,10 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center py-4 text-muted">Belum ada data pengguna.</td>
+                    <td colspan="5" class="text-center py-4 text-white">
+                        <i class="fas fa-user-slash fa-3x mb-3 d-block"></i>
+                        Belum ada data pengguna.
+                    </td>
                 </tr>
                 @endforelse
             </tbody>

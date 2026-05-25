@@ -72,8 +72,8 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center py-4 text-muted">
-                        <i class="fas fa-inbox fa-3x mb-3 opacity-50 d-block"></i>
+                    <td colspan="7" class="text-center py-4 text-white">
+                        <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
                         Belum ada data transaksi.
                     </td>
                 </tr>

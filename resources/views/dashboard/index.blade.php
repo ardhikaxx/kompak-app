@@ -77,8 +77,8 @@
         <div class="glass-card p-4 h-100">
             <h5 class="mb-4 text-white">Transaksi Terakhir</h5>
             @if($recentTransaksis->isEmpty())
-                <div class="text-muted text-center py-5">
-                    <i class="fas fa-receipt fa-3x mb-3 opacity-50"></i>
+                <div class="text-white text-center py-5">
+                    <i class="fas fa-receipt fa-3x mb-3"></i>
                     <p>Belum ada transaksi</p>
                 </div>
             @else

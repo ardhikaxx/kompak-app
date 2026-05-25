@@ -62,7 +62,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center py-4 text-muted">Belum ada riwayat stok.</td>
+                    <td colspan="7" class="text-center py-4 text-white">Belum ada riwayat stok.</td>
                 </tr>
                 @endforelse
             </tbody>
