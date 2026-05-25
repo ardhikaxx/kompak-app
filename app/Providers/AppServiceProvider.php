@@ -39,6 +39,15 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('stokRendahCount', 0);
                 $view->with('stokRendahItems', collect());
             }
+
+            // Store Settings
+            $storeName = \App\Models\Setting::get('nama_toko', 'KOMPAK UMKM');
+            $storeAddress = \App\Models\Setting::get('alamat_toko', 'Jl. Contoh No. 123, Indonesia');
+            $storePhone = \App\Models\Setting::get('telepon_toko', '08123456789');
+            
+            $view->with('storeName', $storeName);
+            $view->with('storeAddress', $storeAddress);
+            $view->with('storePhone', $storePhone);
         });
     }
 }

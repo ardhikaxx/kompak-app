@@ -5,7 +5,7 @@
             <i class="fas fa-store"></i>
         </div>
         <div class="logo-text">
-            <span class="logo-name">KOMPAK</span>
+            <span class="logo-name">{{ $storeName }}</span>
             <span class="logo-tagline">UMKM System</span>
         </div>
     </div>
@@ -33,7 +33,6 @@
             <a href="/stok" class="nav-item {{ request()->is('stok*') ? 'active' : '' }}">
                 <span class="nav-icon"><i class="fas fa-warehouse"></i></span>
                 <span class="nav-label">Stok</span>
-                {{-- <span class="nav-badge warning">2</span> --}}
             </a>
         </div>
 
@@ -88,6 +87,14 @@
             <a href="/pengguna" class="nav-item {{ request()->is('pengguna*') ? 'active' : '' }}">
                 <span class="nav-icon"><i class="fas fa-user-cog"></i></span>
                 <span class="nav-label">Pengguna</span>
+            </a>
+            <a href="/aktivitas" class="nav-item {{ request()->is('aktivitas*') ? 'active' : '' }}">
+                <span class="nav-icon"><i class="fas fa-list-ul"></i></span>
+                <span class="nav-label">Log Aktivitas</span>
+            </a>
+            <a href="/pengaturan" class="nav-item {{ request()->is('pengaturan*') ? 'active' : '' }}">
+                <span class="nav-icon"><i class="fas fa-cog"></i></span>
+                <span class="nav-label">Pengaturan Toko</span>
             </a>
         </div>
         @endif

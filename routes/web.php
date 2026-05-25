@@ -33,6 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('keuangan', KeuanganController::class);
     Route::resource('pengguna', PenggunaController::class)->middleware('role:admin');
+    Route::get('/aktivitas', [App\Http\Controllers\DashboardController::class, 'aktivitas'])->name('aktivitas.index')->middleware('role:admin');
+    
+    Route::prefix('pengaturan')->name('setting.')->middleware('role:admin')->group(function () {
+        Route::get('/', [App\Http\Controllers\SettingController::class, 'index'])->name('index');
+        Route::post('/', [App\Http\Controllers\SettingController::class, 'store'])->name('store');
+    });
     
     Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('/penjualan', [LaporanController::class, 'penjualan'])->name('penjualan');
