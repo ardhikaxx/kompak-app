@@ -20,9 +20,9 @@
 <form action="{{ route('transaksi.store') }}" method="POST" id="form-transaksi">
     @csrf
     <input type="hidden" name="kode_transaksi" value="{{ $kodeTransaksi }}">
-    <div class="row g-4">
+    <div class="row g-4" style="height: calc(100vh - 200px); min-height: 500px;">
         <!-- Kiri: Pilih Produk -->
-        <div class="col-lg-7">
+        <div class="col-lg-7 h-100">
             <div class="glass-card p-4 h-100 d-flex flex-column">
                 <h5 class="text-white mb-4">Pilih Produk</h5>
                 
@@ -33,7 +33,7 @@
 
                 <div class="row g-3 flex-grow-1" id="produk-list" style="overflow-y: auto;">
                     @foreach($produks as $produk)
-                    <div class="col-md-4 col-sm-6 produk-item" data-nama="{{ strtolower($produk->nama_produk) }}">
+                    <div class="col-md-4 col-sm-6 produk-item mb-2" data-nama="{{ strtolower($produk->nama_produk) }}">
                         <div class="glass-card-blue p-3 text-center cursor-pointer" style="cursor:pointer; transition:all 0.2s;" onclick="tambahKeKeranjang({{ $produk->id }}, '{{ $produk->nama_produk }}', {{ $produk->harga_jual }}, {{ $produk->stok }})">
                             <i class="fas fa-box fa-2x text-accent mb-2"></i>
                             <h6 class="text-white mb-1" style="font-size:0.85rem;">{{ Str::limit($produk->nama_produk, 20) }}</h6>
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Kanan: Keranjang & Pembayaran -->
-        <div class="col-lg-5">
+        <div class="col-lg-5 h-100">
             <div class="glass-card p-4 d-flex flex-column h-100">
                 <h5 class="text-white mb-3">Detail Transaksi</h5>
                 
