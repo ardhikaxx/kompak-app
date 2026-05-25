@@ -20,104 +20,154 @@
 <form action="{{ route('transaksi.store') }}" method="POST" id="form-transaksi">
     @csrf
     <input type="hidden" name="kode_transaksi" value="{{ $kodeTransaksi }}">
-    <div class="row g-4 align-items-start">
-        <!-- Kiri: Pilih Produk -->
-        <div class="col-lg-7" style="height: calc(100vh - 200px); min-height: 550px;">
+    
+    <div class="row g-4" style="height: calc(100vh - 180px);">
+        <!-- Kiri: Pilih Produk (65% width on desktop) -->
+        <div class="col-lg-8 h-100">
             <div class="glass-card p-4 h-100 d-flex flex-column">
-                <h5 class="text-white mb-4">Pilih Produk</h5>
-                
-                <div class="input-glass-icon mb-4">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="search-produk" class="form-glass" placeholder="Cari nama produk...">
-                </div>
-
-                <div class="row g-3 flex-grow-1" id="produk-list" style="overflow-y: auto;">
-                    @foreach($produks as $produk)
-                    <div class="col-md-4 col-sm-6 produk-item mb-2" data-nama="{{ strtolower($produk->nama_produk) }}">
-                        <div class="glass-card-blue p-3 text-center cursor-pointer" style="cursor:pointer; transition:all 0.2s;" onclick="tambahKeKeranjang({{ $produk->id }}, '{{ $produk->nama_produk }}', {{ $produk->harga_jual }}, {{ $produk->stok }})">
-                            <i class="fas fa-box fa-2x text-accent mb-2"></i>
-                            <h6 class="text-white mb-1" style="font-size:0.85rem;">{{ Str::limit($produk->nama_produk, 20) }}</h6>
-                            <div class="text-accent fw-bold small">Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}</div>
-                            <div class="text-white" style="font-size:0.7rem;">Stok: {{ $produk->stok }}</div>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="text-white mb-0"><i class="fas fa-th-large me-2 text-accent"></i> Pilih Produk</h5>
+                    <div style="width: 300px;">
+                        <div class="input-glass-icon">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-produk" class="form-glass" placeholder="Cari nama atau kode...">
                         </div>
                     </div>
-                    @endforeach
+                </div>
+
+                <!-- Scrollable Product Grid -->
+                <div class="flex-grow-1" style="overflow-y: auto; overflow-x: hidden; padding-right: 5px;">
+                    <div class="row g-3" id="produk-list">
+                        @foreach($produks as $produk)
+                        <div class="col-xl-3 col-md-4 col-sm-6 produk-item mb-2" data-nama="{{ strtolower($produk->nama_produk) }}">
+                            <div class="glass-card-blue p-3 text-center h-100 d-flex flex-column justify-content-between position-relative overflow-hidden" 
+                                 style="cursor:pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--glass-border);" 
+                                 onclick="tambahKeKeranjang({{ $produk->id }}, '{{ $produk->nama_produk }}', {{ $produk->harga_jual }}, {{ $produk->stok }})">
+                                
+                                @if($produk->stok <= 0)
+                                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.6); z-index: 2;">
+                                        <span class="badge bg-danger">HABIS</span>
+                                    </div>
+                                @endif
+
+                                <div class="mb-2">
+                                    <i class="fas fa-box fa-2x text-accent mb-2"></i>
+                                    <h6 class="text-white mb-1" style="font-size:0.85rem; line-height: 1.3;">{{ Str::limit($produk->nama_produk, 30) }}</h6>
+                                    <div class="text-white opacity-75 small font-mono" style="font-size: 0.7rem;">{{ $produk->kode_produk }}</div>
+                                </div>
+                                
+                                <div>
+                                    <div class="text-accent fw-bold mb-1">Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}</div>
+                                    <div class="text-white small py-1 rounded" style="background: rgba(255,255,255,0.05); font-size:0.7rem;">
+                                        Stok: <span class="{{ $produk->stok <= $produk->stok_minimum ? 'text-warning fw-bold' : '' }}">{{ $produk->stok }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Kanan: Keranjang & Pembayaran -->
-        <div class="col-lg-5">
-            <div class="glass-card p-4 d-flex flex-column" style="max-height: calc(100vh - 200px); min-height: 550px;">
-                <h5 class="text-white mb-3">Detail Transaksi</h5>
+        <!-- Kanan: Keranjang (35% width on desktop) -->
+        <div class="col-lg-4 h-100">
+            <div class="glass-card p-4 h-100 d-flex flex-column">
+                <h5 class="text-white mb-4"><i class="fas fa-shopping-cart me-2 text-accent"></i> Keranjang</h5>
                 
-                <div class="mb-3">
+                <!-- Pelanggan Selection -->
+                <div class="mb-4">
+                    <label class="form-glass-label">Pelanggan</label>
                     <select name="pelanggan_id" class="form-glass">
                         <option value="">-- Pelanggan Umum --</option>
                         @foreach($pelanggans as $pelanggan)
-                            <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama_pelanggan }} ({{ $pelanggan->telepon ?? '-' }})</option>
+                            <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama_pelanggan }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="mb-4 flex-grow-1" style="overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1rem;">
+                <!-- Scrollable Cart Area -->
+                <div class="flex-grow-1 mb-4" style="overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
                     <div id="keranjang-kosong" class="text-center text-white py-5">
-                        <i class="fas fa-shopping-basket fa-3x mb-3"></i>
+                        <i class="fas fa-shopping-basket fa-3x mb-3 opacity-50"></i>
                         <p>Keranjang masih kosong</p>
                     </div>
                     <table class="table-glass w-100" id="tabel-keranjang" style="display:none;">
-                        <thead>
+                        <thead class="sticky-top" style="background: var(--bg-secondary); z-index: 10;">
                             <tr>
-                                <th>Item</th>
-                                <th width="30%">Qty</th>
-                                <th class="text-end">Subtotal</th>
-                                <th></th>
+                                <th class="ps-3 py-2 small">Item</th>
+                                <th class="py-2 small text-center" width="80">Qty</th>
+                                <th class="pe-3 py-2 small text-end">Total</th>
                             </tr>
                         </thead>
                         <tbody id="keranjang-body">
-                            <!-- Items go here -->
+                            <!-- Items inserted by JS -->
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Kalkulasi -->
+                <!-- Calculation Summary -->
                 <div class="p-3 mb-4 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
                     <div class="d-flex justify-content-between mb-2">
-                        <span class="text-white">Subtotal</span>
-                        <span class="text-white fw-bold" id="lbl-subtotal">Rp 0</span>
+                        <span class="text-white opacity-75 small">Subtotal</span>
+                        <span class="text-white fw-bold small" id="lbl-subtotal">Rp 0</span>
                     </div>
-                    <div class="d-flex justify-content-between mb-2 align-items-center">
-                        <span class="text-white">Diskon (Rp)</span>
-                        <input type="number" name="diskon" id="input-diskon" class="form-glass form-control-sm w-50 text-end" value="0" min="0" oninput="hitungTotal()">
+                    <div class="row g-2 mb-2 align-items-center">
+                        <div class="col-6">
+                            <span class="text-white opacity-75 small">Diskon (Rp)</span>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" name="diskon" id="input-diskon" class="form-glass form-control-sm text-end" value="0" min="0" oninput="hitungTotal()">
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between mb-3 align-items-center">
-                        <span class="text-white">Pajak (Rp)</span>
-                        <input type="number" name="pajak" id="input-pajak" class="form-glass form-control-sm w-50 text-end" value="0" min="0" oninput="hitungTotal()">
-                    </div>
-                    <div class="d-flex justify-content-between pt-3 border-top border-secondary">
-                        <h5 class="text-white mb-0">Total</h5>
-                        <h4 class="text-accent fw-bold mb-0" id="lbl-total">Rp 0</h4>
+                    <div class="d-flex justify-content-between pt-3 mt-2 border-top border-secondary">
+                        <h6 class="text-white mb-0">Grand Total</h6>
+                        <h5 class="text-accent fw-bold mb-0" id="lbl-total">Rp 0</h5>
                     </div>
                 </div>
 
-                <!-- Pembayaran -->
+                <!-- Payment Area -->
                 <div class="mb-3">
-                    <label class="form-glass-label">Bayar (Rp) <span class="text-danger">*</span></label>
-                    <input type="number" name="bayar" id="input-bayar" class="form-glass fs-5 text-end @error('bayar') border-danger @enderror" value="{{ old('bayar') }}" required min="0" oninput="hitungKembalian()">
-                    @error('bayar') <small class="text-danger">{{ $message }}</small> @enderror
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <label class="form-glass-label">Nominal Bayar</label>
+                            <input type="number" name="bayar" id="input-bayar" class="form-glass fs-4 fw-bold text-end text-accent" placeholder="0" required min="0" oninput="hitungKembalian()">
+                        </div>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-between mb-4 align-items-center">
-                    <span class="text-white">Kembalian</span>
-                    <h5 class="text-success mb-0" id="lbl-kembalian">Rp 0</h5>
+                
+                <div class="d-flex justify-content-between mb-4 align-items-center p-2 rounded" style="background: rgba(34, 197, 94, 0.1);">
+                    <span class="text-white small">Kembalian</span>
+                    <h5 class="text-success fw-bold mb-0" id="lbl-kembalian">Rp 0</h5>
                 </div>
 
-                <button type="button" class="btn-glass-primary w-100 py-2 fs-6" onclick="prosesTransaksi()">
-                    <i class="fas fa-check-circle me-2"></i> Proses Transaksi
+                <button type="button" class="btn-glass-primary w-100 py-3 fs-5 fw-bold" onclick="prosesTransaksi()">
+                    <i class="fas fa-check-circle me-2"></i> PROSES BAYAR
                 </button>
             </div>
         </div>
     </div>
 </form>
+
+<style>
+    /* Custom Scrollbar for Glass Theme */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue-primary); }
+    
+    .produk-item .glass-card-blue:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glass-shadow-blue);
+        border-color: var(--blue-primary) !important;
+    }
+    
+    #tabel-keranjang thead th {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
 
 @push('scripts')
 <script>
@@ -188,22 +238,23 @@
             keranjang.forEach((item, index) => {
                 let subtotal = item.harga * item.qty;
                 tbody.innerHTML += `
-                    <tr>
-                        <td class="text-white small">
-                            ${item.nama}
+                    <tr class="border-bottom border-secondary">
+                        <td class="ps-3 py-3">
+                            <div class="text-white fw-bold small">${item.nama}</div>
+                            <div class="text-white opacity-50" style="font-size:0.7rem;">Rp ${formatRupiah(item.harga)}</div>
                             <input type="hidden" name="produk_id[]" value="${item.id}">
                             <input type="hidden" name="jumlah[]" value="${item.qty}">
                         </td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="btn btn-sm btn-dark px-2 py-0" onclick="ubahQty(${index}, -1)">-</button>
-                                <span class="text-white px-2">${item.qty}</span>
-                                <button type="button" class="btn btn-sm btn-dark px-2 py-0" onclick="ubahQty(${index}, 1)">+</button>
+                        <td class="text-center py-3">
+                            <div class="d-flex align-items-center justify-content-center gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-light border-0 px-1 py-0" onclick="ubahQty(${index}, -1)"><i class="fas fa-minus" style="font-size:0.6rem;"></i></button>
+                                <span class="text-white fw-bold small">${item.qty}</span>
+                                <button type="button" class="btn btn-sm btn-outline-light border-0 px-1 py-0" onclick="ubahQty(${index}, 1)"><i class="fas fa-plus" style="font-size:0.6rem;"></i></button>
                             </div>
                         </td>
-                        <td class="text-end text-accent small">Rp ${formatRupiah(subtotal)}</td>
-                        <td class="text-end">
-                            <button type="button" class="btn-glass-icon delete" style="width:24px;height:24px;font-size:0.7rem;" onclick="hapusItem(${index})"><i class="fas fa-times"></i></button>
+                        <td class="pe-3 text-end py-3">
+                            <div class="text-accent fw-bold small">Rp ${formatRupiah(subtotal)}</div>
+                            <a href="javascript:void(0)" class="text-danger small" style="text-decoration:none; font-size:0.65rem;" onclick="hapusItem(${index})">Hapus</a>
                         </td>
                     </tr>
                 `;
@@ -215,9 +266,8 @@
     function hitungTotal() {
         let subtotal = keranjang.reduce((sum, item) => sum + (item.harga * item.qty), 0);
         let diskon = parseInt(document.getElementById('input-diskon').value) || 0;
-        let pajak = parseInt(document.getElementById('input-pajak').value) || 0;
         
-        let total = subtotal - diskon + pajak;
+        let total = subtotal - diskon;
         if(total < 0) total = 0;
 
         document.getElementById('lbl-subtotal').innerText = 'Rp ' + formatRupiah(subtotal);
@@ -236,10 +286,10 @@
         
         if(kembalian < 0) {
             lblKembalian.innerText = 'Kurang Rp ' + formatRupiah(Math.abs(kembalian));
-            lblKembalian.className = 'text-danger mb-0';
+            lblKembalian.className = 'text-danger fw-bold mb-0';
         } else {
             lblKembalian.innerText = 'Rp ' + formatRupiah(kembalian);
-            lblKembalian.className = 'text-success mb-0';
+            lblKembalian.className = 'text-success fw-bold mb-0';
         }
     }
 
@@ -258,13 +308,18 @@
         }
 
         Swal.fire({
-            title: 'Proses Transaksi?',
-            text: 'Pastikan uang diterima sudah sesuai.',
+            title: 'Konfirmasi Bayar',
+            html: `<div class="text-center">
+                    <p class="mb-1">Total Tagihan:</p>
+                    <h3 class="text-primary fw-bold mb-3">Rp ${formatRupiah(total)}</h3>
+                    <p class="mb-1">Uang Diterima:</p>
+                    <h4 class="text-success fw-bold">Rp ${formatRupiah(bayar)}</h4>
+                   </div>`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3b82f6',
             cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Ya, Proses',
+            confirmButtonText: 'Ya, Proses Sekarang',
             cancelButtonText: 'Batal',
             background: 'rgba(15, 23, 42, 0.95)',
             color: '#e2e8f0',
