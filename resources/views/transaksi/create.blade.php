@@ -23,7 +23,7 @@
     <div class="row g-4">
         <!-- Kiri: Pilih Produk -->
         <div class="col-lg-7">
-            <div class="glass-card p-4 h-100">
+            <div class="glass-card p-4 h-100 d-flex flex-column">
                 <h5 class="text-white mb-4">Pilih Produk</h5>
                 
                 <div class="input-glass-icon mb-4">
@@ -31,7 +31,7 @@
                     <input type="text" id="search-produk" class="form-glass" placeholder="Cari nama produk...">
                 </div>
 
-                <div class="row g-3" id="produk-list" style="max-height: 500px; overflow-y: auto;">
+                <div class="row g-3 flex-grow-1" id="produk-list" style="overflow-y: auto;">
                     @foreach($produks as $produk)
                     <div class="col-md-4 col-sm-6 produk-item" data-nama="{{ strtolower($produk->nama_produk) }}">
                         <div class="glass-card-blue p-3 text-center cursor-pointer" style="cursor:pointer; transition:all 0.2s;" onclick="tambahKeKeranjang({{ $produk->id }}, '{{ $produk->nama_produk }}', {{ $produk->harga_jual }}, {{ $produk->stok }})">
