@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('spk')->name('spk.')->group(function () {
         Route::get('/', [SpkController::class, 'index'])->name('index');
         Route::get('/kriteria', [SpkController::class, 'kriteria'])->name('kriteria');
+        Route::post('/kriteria', [SpkController::class, 'simpanKriteria'])->name('kriteria.store');
         Route::get('/hitung', [SpkController::class, 'hitung'])->name('hitung');
         Route::get('/hasil', [SpkController::class, 'hasil'])->name('hasil');
     });

@@ -23,7 +23,7 @@
                 <i class="fas fa-box"></i>
             </div>
             <div>
-                <div class="stat-value">0</div>
+                <div class="stat-value">{{ $totalProduk }}</div>
                 <div class="stat-label">Total Produk</div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <i class="fas fa-shopping-cart"></i>
             </div>
             <div>
-                <div class="stat-value">0</div>
+                <div class="stat-value fs-5">Rp {{ number_format($penjualanHariIni, 0, ',', '.') }}</div>
                 <div class="stat-label">Penjualan Hari Ini</div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div>
-                <div class="stat-value">0</div>
+                <div class="stat-value">{{ $stokRendah }}</div>
                 <div class="stat-label">Stok Rendah</div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 <i class="fas fa-users"></i>
             </div>
             <div>
-                <div class="stat-value">0</div>
+                <div class="stat-value">{{ $totalPelanggan }}</div>
                 <div class="stat-label">Total Pelanggan</div>
             </div>
         </div>
@@ -69,17 +69,34 @@
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="glass-card p-4 h-100">
-            <h5 class="mb-4 text-white">Grafik Penjualan</h5>
+            <h5 class="mb-4 text-white">Grafik Penjualan (7 Hari Terakhir)</h5>
             <canvas id="salesChart" height="100"></canvas>
         </div>
     </div>
     <div class="col-lg-4">
         <div class="glass-card p-4 h-100">
             <h5 class="mb-4 text-white">Transaksi Terakhir</h5>
-            <div class="text-muted text-center py-5">
-                <i class="fas fa-receipt fa-3x mb-3 opacity-50"></i>
-                <p>Belum ada transaksi</p>
-            </div>
+            @if($recentTransaksis->isEmpty())
+                <div class="text-muted text-center py-5">
+                    <i class="fas fa-receipt fa-3x mb-3 opacity-50"></i>
+                    <p>Belum ada transaksi</p>
+                </div>
+            @else
+                <div class="list-group list-group-flush bg-transparent">
+                    @foreach($recentTransaksis as $trx)
+                    <div class="list-group-item bg-transparent px-0 border-secondary border-bottom">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 text-white">{{ $trx->pelanggan->nama_pelanggan ?? 'Umum' }}</h6>
+                            <small class="text-accent">Rp {{ number_format($trx->total, 0, ',', '.') }}</small>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <small class="text-muted font-mono">{{ $trx->kode_transaksi }}</small>
+                            <small class="text-muted">{{ $trx->tanggal->diffForHumans() }}</small>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 </div>
@@ -92,10 +109,10 @@
         const salesChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                labels: {!! json_encode($chartLabels) !!},
                 datasets: [{
-                    label: 'Pendapatan',
-                    data: [0, 0, 0, 0, 0, 0, 0],
+                    label: 'Pendapatan (Rp)',
+                    data: {!! json_encode($chartData) !!},
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59,130,246,0.08)',
                     borderWidth: 2,
@@ -116,6 +133,16 @@
                         borderWidth: 1,
                         titleColor: '#f1f5f9',
                         bodyColor: '#94a3b8',
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('id-ID').format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -126,4 +153,4 @@
         });
     });
 </script>
-@endsection
+@endpush
