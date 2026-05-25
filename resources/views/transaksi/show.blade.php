@@ -5,7 +5,7 @@
 <div class="page-header mb-4">
     <div>
         <h4 class="page-title mb-1">
-            <i class="fas fa-receipt me-2 text-accent"></i> Detail Transaksi
+            <i class="fas fa-receipt me-2 text-white"></i> Detail Transaksi
         </h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
