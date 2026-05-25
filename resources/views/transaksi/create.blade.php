@@ -72,13 +72,12 @@
 
         <!-- Kanan: Keranjang (35% width on desktop) -->
         <div class="col-lg-4 h-100">
-            <div class="glass-card p-4 h-100 d-flex flex-column">
-                <h5 class="text-white mb-4"><i class="fas fa-shopping-cart me-2 text-accent"></i> Keranjang</h5>
+            <div class="glass-card p-3 h-100 d-flex flex-column">
+                <h5 class="text-white mb-3 small fw-bold"><i class="fas fa-shopping-cart me-2 text-accent"></i> KERANJANG</h5>
                 
                 <!-- Pelanggan Selection -->
-                <div class="mb-4">
-                    <label class="form-glass-label">Pelanggan</label>
-                    <select name="pelanggan_id" class="form-glass">
+                <div class="mb-3">
+                    <select name="pelanggan_id" class="form-glass form-glass-sm">
                         <option value="">-- Pelanggan Umum --</option>
                         @foreach($pelanggans as $pelanggan)
                             <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama_pelanggan }}</option>
@@ -87,17 +86,17 @@
                 </div>
 
                 <!-- Scrollable Cart Area -->
-                <div class="flex-grow-1 mb-4" style="min-height: 250px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
-                    <div id="keranjang-kosong" class="text-center text-white py-5">
-                        <i class="fas fa-shopping-basket fa-3x mb-3 opacity-50"></i>
-                        <p>Keranjang masih kosong</p>
+                <div class="flex-grow-1 mb-3" style="min-height: 150px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
+                    <div id="keranjang-kosong" class="text-center text-white py-4">
+                        <i class="fas fa-shopping-basket fa-2x mb-2 opacity-50"></i>
+                        <p class="small mb-0">Keranjang masih kosong</p>
                     </div>
                     <table class="table-glass w-100" id="tabel-keranjang" style="display:none;">
                         <thead class="sticky-top" style="background: var(--bg-secondary); z-index: 10;">
                             <tr>
-                                <th class="ps-3 py-2 small">Item</th>
-                                <th class="py-2 small text-center" width="80">Qty</th>
-                                <th class="pe-3 py-2 small text-end">Total</th>
+                                <th class="ps-2 py-2 small" style="font-size: 0.65rem;">ITEM</th>
+                                <th class="py-2 small text-center" width="60" style="font-size: 0.65rem;">QTY</th>
+                                <th class="pe-2 py-2 small text-end" style="font-size: 0.65rem;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody id="keranjang-body">
@@ -106,39 +105,30 @@
                     </table>
                 </div>
 
-                <!-- Calculation Summary -->
-                <div class="p-3 mb-4 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
-                    <div class="d-flex justify-content-between mb-2">
+                <!-- Calculation & Payment Area -->
+                <div class="p-3 rounded mb-2" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
+                    <div class="d-flex justify-content-between mb-1">
                         <span class="text-white opacity-75 small">Subtotal</span>
-                        <span class="text-white fw-bold small" id="lbl-subtotal">Rp 0</span>
+                        <span class="text-white small" id="lbl-subtotal">Rp 0</span>
                     </div>
-                    <div class="row g-2 mb-2 align-items-center">
-                        <div class="col-6">
-                            <span class="text-white opacity-75 small">Diskon (Rp)</span>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" name="diskon" id="input-diskon" class="form-glass form-control-sm text-end" value="0" min="0" oninput="hitungTotal()">
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-white opacity-75 small">Diskon</span>
+                        <input type="number" name="diskon" id="input-diskon" class="form-glass form-control-sm text-end py-0" style="width: 100px; height: 28px;" value="0" min="0" oninput="hitungTotal()">
                     </div>
-                    <div class="d-flex justify-content-between pt-3 mt-2 border-top border-secondary">
-                        <h6 class="text-white mb-0">Grand Total</h6>
-                        <h5 class="text-accent fw-bold mb-0" id="lbl-total">Rp 0</h5>
+                    <div class="d-flex justify-content-between pt-2 border-top border-secondary mb-3">
+                        <span class="text-white fw-bold">TOTAL</span>
+                        <span class="text-accent fw-bold h5 mb-0" id="lbl-total">Rp 0</span>
                     </div>
-                </div>
-
-                <!-- Payment Area -->
-                <div class="mb-3">
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <label class="form-glass-label">Nominal Bayar</label>
-                            <input type="number" name="bayar" id="input-bayar" class="form-glass fs-4 fw-bold text-end text-accent" placeholder="0" required min="0" oninput="hitungKembalian()">
-                        </div>
+                    
+                    <div class="mb-2">
+                        <label class="form-glass-label mb-1" style="font-size: 0.65rem;">NOMINAL BAYAR</label>
+                        <input type="number" name="bayar" id="input-bayar" class="form-glass fs-4 fw-bold text-end text-accent" style="height: 50px;" placeholder="0" required min="0" oninput="hitungKembalian()">
                     </div>
-                </div>
-                
-                <div class="d-flex justify-content-between mb-4 align-items-center p-2 rounded" style="background: rgba(34, 197, 94, 0.1);">
-                    <span class="text-white small">Kembalian</span>
-                    <h5 class="text-success fw-bold mb-0" id="lbl-kembalian">Rp 0</h5>
+                    
+                    <div class="d-flex justify-content-between align-items-center p-2 rounded" style="background: rgba(34, 197, 94, 0.1);">
+                        <span class="text-white small">Kembalian</span>
+                        <span class="text-success fw-bold" id="lbl-kembalian">Rp 0</span>
+                    </div>
                 </div>
 
                 <button type="button" class="btn-glass-primary w-100 py-3 fs-5 fw-bold" onclick="prosesTransaksi()">
