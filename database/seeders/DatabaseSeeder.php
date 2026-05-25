@@ -36,10 +36,10 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // 2. Users
-        $admin = User::create(['name' => 'Budi Administrator', 'email' => 'admin@kompak.com', 'password' => Hash::make('password123'), 'role' => 'admin', 'is_active' => true]);
-        $pemilik = User::create(['name' => 'Ibu Hajah Siti', 'email' => 'pemilik@kompak.com', 'password' => Hash::make('password123'), 'role' => 'pemilik', 'is_active' => true]);
-        $kasir1 = User::create(['name' => 'Agus Kasir', 'email' => 'kasir@kompak.com', 'password' => Hash::make('password123'), 'role' => 'kasir', 'is_active' => true]);
-        $kasir2 = User::create(['name' => 'Sari Pegawai', 'email' => 'sari@kompak.com', 'password' => Hash::make('password123'), 'role' => 'kasir', 'is_active' => true]);
+        $admin = User::create(['name' => 'Budi Administrator', 'email' => 'admin@kompak.com', 'password' => Hash::make('password'), 'role' => 'admin', 'is_active' => true]);
+        $pemilik = User::create(['name' => 'Ibu Hajah Siti', 'email' => 'pemilik@kompak.com', 'password' => Hash::make('password'), 'role' => 'pemilik', 'is_active' => true]);
+        $kasir1 = User::create(['name' => 'Agus Kasir', 'email' => 'kasir@kompak.com', 'password' => Hash::make('password'), 'role' => 'kasir', 'is_active' => true]);
+        $kasir2 = User::create(['name' => 'Sari Pegawai', 'email' => 'sari@kompak.com', 'password' => Hash::make('password'), 'role' => 'kasir', 'is_active' => true]);
 
         // 3. Kategori
         $kats = [
