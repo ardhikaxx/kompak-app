@@ -38,7 +38,7 @@
                             <i class="fas fa-box fa-2x text-accent mb-2"></i>
                             <h6 class="text-white mb-1" style="font-size:0.85rem;">{{ Str::limit($produk->nama_produk, 20) }}</h6>
                             <div class="text-accent fw-bold small">Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}</div>
-                            <div class="text-muted" style="font-size:0.7rem;">Stok: {{ $produk->stok }}</div>
+                            <div class="text-white" style="font-size:0.7rem;">Stok: {{ $produk->stok }}</div>
                         </div>
                     </div>
                     @endforeach
@@ -83,15 +83,15 @@
                 <!-- Kalkulasi -->
                 <div class="p-3 mb-4 rounded" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);">
                     <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted">Subtotal</span>
+                        <span class="text-white">Subtotal</span>
                         <span class="text-white fw-bold" id="lbl-subtotal">Rp 0</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2 align-items-center">
-                        <span class="text-muted">Diskon (Rp)</span>
+                        <span class="text-white">Diskon (Rp)</span>
                         <input type="number" name="diskon" id="input-diskon" class="form-glass form-control-sm w-50 text-end" value="0" min="0" oninput="hitungTotal()">
                     </div>
                     <div class="d-flex justify-content-between mb-3 align-items-center">
-                        <span class="text-muted">Pajak (Rp)</span>
+                        <span class="text-white">Pajak (Rp)</span>
                         <input type="number" name="pajak" id="input-pajak" class="form-glass form-control-sm w-50 text-end" value="0" min="0" oninput="hitungTotal()">
                     </div>
                     <div class="d-flex justify-content-between pt-3 border-top border-secondary">
@@ -107,7 +107,7 @@
                     @error('bayar') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="d-flex justify-content-between mb-4 align-items-center">
-                    <span class="text-muted">Kembalian</span>
+                    <span class="text-white">Kembalian</span>
                     <h5 class="text-success mb-0" id="lbl-kembalian">Rp 0</h5>
                 </div>
 
