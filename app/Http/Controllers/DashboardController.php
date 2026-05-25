@@ -71,6 +71,8 @@ class DashboardController extends Controller
             'recentTransaksis',
             'labaBersih', 'labaKotor', 'totalPengeluaranOperasional'
         ));
+    }
+
     public function aktivitas()
     {
         $logs = \App\Models\AktivitasLog::with('user')->latest()->paginate(20);
