@@ -131,7 +131,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn-glass-primary w-100 py-3 fs-5 fw-bold" onclick="prosesTransaksi()">
+                <button type="button" class="btn-glass-primary w-100 py-2 fs-6" onclick="prosesTransaksi()">
                     <i class="fas fa-check-circle me-2"></i> PROSES BAYAR
                 </button>
             </div>
