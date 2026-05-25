@@ -16,9 +16,9 @@
         </button>
         <div class="topbar-user">
             @if(auth()->check())
-                <img src="{{ auth()->user()->foto ?? asset('img/avatar.png') }}" alt="User Avatar">
+                <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=3b82f6&color=fff" alt="User Avatar">
             @else
-                <img src="https://ui-avatars.com/api/?name=Guest" alt="User Avatar">
+                <img src="https://ui-avatars.com/api/?name=Guest&background=64748b&color=fff" alt="User Avatar">
             @endif
         </div>
     </div>

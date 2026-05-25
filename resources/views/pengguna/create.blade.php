@@ -21,7 +21,7 @@
 </div>
 
 <div class="glass-card p-4">
-    <form action="{{ route('pengguna.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('pengguna.store') }}" method="POST">
         @csrf
         <div class="row g-4">
             <div class="col-md-8">
@@ -58,12 +58,6 @@
             </div>
             
             <div class="col-md-4">
-                <div class="glass-card-blue p-3 rounded mb-3">
-                    <label class="form-glass-label">Foto Profil (Opsional)</label>
-                    <input type="file" name="foto" class="form-glass mb-2" accept="image/*">
-                    @error('foto') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-                
                 <div class="glass-card-blue p-3 rounded mb-3">
                     <label class="form-glass-label">Status Akun</label>
                     <div class="form-check form-switch mt-2">

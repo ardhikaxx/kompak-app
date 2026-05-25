@@ -25,7 +25,6 @@ class PenggunaRequest extends FormRequest
                 Rule::unique('users')->ignore($userId),
             ],
             'role' => 'required|in:admin,pemilik,kasir',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'is_active' => 'boolean',
         ];
 

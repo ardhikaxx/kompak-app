@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Http\Requests\PenggunaRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class PenggunaController extends Controller
 {
@@ -34,10 +33,6 @@ class PenggunaController extends Controller
             $data = $request->validated();
             $data['password'] = Hash::make($data['password']);
 
-            if ($request->hasFile('foto')) {
-                $data['foto'] = $request->file('foto')->store('pengguna', 'public');
-            }
-
             User::create($data);
             return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.');
         } catch (\Exception $e) {
@@ -61,13 +56,6 @@ class PenggunaController extends Controller
                 unset($data['password']);
             }
 
-            if ($request->hasFile('foto')) {
-                if ($pengguna->foto && Storage::disk('public')->exists($pengguna->foto)) {
-                    Storage::disk('public')->delete($pengguna->foto);
-                }
-                $data['foto'] = $request->file('foto')->store('pengguna', 'public');
-            }
-
             $pengguna->update($data);
             return redirect()->route('pengguna.index')->with('success', 'Data pengguna berhasil diperbarui.');
         } catch (\Exception $e) {
@@ -81,9 +69,7 @@ class PenggunaController extends Controller
             if ($pengguna->id === auth()->id()) {
                 return redirect()->route('pengguna.index')->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
             }
-            if ($pengguna->foto && Storage::disk('public')->exists($pengguna->foto)) {
-                Storage::disk('public')->delete($pengguna->foto);
-            }
+            
             $pengguna->delete();
             return redirect()->route('pengguna.index')->with('success', 'Pengguna berhasil dihapus.');
         } catch (\Exception $e) {

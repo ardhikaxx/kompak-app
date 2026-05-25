@@ -96,9 +96,9 @@
     <!-- User Card -->
     <div class="sidebar-user">
         @if(auth()->check())
-            <img src="{{ auth()->user()->foto ?? asset('img/avatar.png') }}" alt="avatar" class="sidebar-avatar">
+            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=3b82f6&color=fff" alt="avatar" class="sidebar-avatar">
             <div class="sidebar-user-info">
-                <p class="sidebar-user-name">{{ auth()->user()->nama }}</p>
+                <p class="sidebar-user-name">{{ auth()->user()->name }}</p>
                 <p class="sidebar-user-role">{{ ucfirst(auth()->user()->role) }}</p>
             </div>
             <button onclick="konfirmasiLogout()" class="btn-glass-icon ms-auto">

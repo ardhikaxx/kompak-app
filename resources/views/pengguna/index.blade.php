@@ -37,7 +37,7 @@
                     <td>{{ $loop->iteration + $penggunas->firstItem() - 1 }}</td>
                     <td>
                         <div class="d-flex align-items-center gap-3">
-                            <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('img/avatar.png') }}" alt="{{ $user->name }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--glass-border);">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=3b82f6&color=fff" alt="{{ $user->name }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--glass-border);">
                             <div>
                                 <div class="fw-bold text-white">{{ $user->name }}</div>
                                 <div class="small text-muted">{{ $user->email }}</div>

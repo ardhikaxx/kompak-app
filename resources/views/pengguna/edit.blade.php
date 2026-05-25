@@ -21,7 +21,7 @@
 </div>
 
 <div class="glass-card p-4">
-    <form action="{{ route('pengguna.update', $pengguna->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('pengguna.update', $pengguna->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row g-4">
@@ -59,17 +59,6 @@
             </div>
             
             <div class="col-md-4">
-                <div class="glass-card-blue p-3 rounded mb-3">
-                    <label class="form-glass-label">Foto Profil (Ganti baru)</label>
-                    <div class="mb-2">
-                        @if($pengguna->foto)
-                            <img src="{{ asset('storage/' . $pengguna->foto) }}" alt="Preview" style="max-height: 100px; border-radius: var(--radius-md);">
-                        @endif
-                    </div>
-                    <input type="file" name="foto" class="form-glass" accept="image/*">
-                    @error('foto') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-                
                 <div class="glass-card-blue p-3 rounded mb-3">
                     <label class="form-glass-label">Status Akun</label>
                     <div class="form-check form-switch mt-2">
