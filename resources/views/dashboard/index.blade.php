@@ -36,19 +36,19 @@
     </div>
     <div class="col-md-3">
         <div class="glass-card stat-card">
-            <div class="stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="stat-icon cyan"><i class="fas fa-hand-holding-usd"></i></div>
             <div>
-                <div class="stat-value">{{ $stokRendah }}</div>
-                <div class="stat-label">Stok Rendah</div>
+                <div class="stat-value fs-5 {{ $labaBersih >= 0 ? 'text-success' : 'text-danger' }}">Rp {{ number_format($labaBersih, 0, ',', '.') }}</div>
+                <div class="stat-label">Laba Bersih (Estimasi)</div>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="glass-card stat-card">
-            <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+            <div class="stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
             <div>
-                <div class="stat-value">{{ $totalPelanggan }}</div>
-                <div class="stat-label">Total Pelanggan</div>
+                <div class="stat-value">{{ $stokRendah }}</div>
+                <div class="stat-label">Stok Rendah</div>
             </div>
         </div>
     </div>

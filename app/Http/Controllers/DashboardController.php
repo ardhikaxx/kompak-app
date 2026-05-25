@@ -8,6 +8,7 @@ use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use App\Models\Keuangan;
 use App\Models\Kategori;
+use App\Models\DetailTransaksi;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -42,7 +43,19 @@ class DashboardController extends Controller
             $expenseData[] = Keuangan::where('jenis', 'keluar')->whereMonth('tanggal', $monthDate->month)->whereYear('tanggal', $monthDate->year)->sum('jumlah');
         }
 
-        // 3. Data Distribusi Kategori (Pie Chart)
+        // 3. Analisis Margin Keuntungan
+        // Rumus Laba Bersih: Sum ( (Harga Jual - Harga Beli) * Qty ) - Pengeluaran Operasional
+        $totalPendapatan = Transaksi::sum('total');
+        
+        // Hitung total HPP (Harga Pokok Penjualan) dari semua detail transaksi
+        $totalHpp = DetailTransaksi::join('produks', 'detail_transaksis.produk_id', '=', 'produks.id')
+                    ->sum(DB::raw('produks.harga_beli * detail_transaksis.jumlah'));
+        
+        $labaKotor = $totalPendapatan - $totalHpp;
+        $totalPengeluaranOperasional = Keuangan::where('jenis', 'keluar')->sum('jumlah');
+        $labaBersih = $labaKotor - $totalPengeluaranOperasional;
+
+        // 4. Data Distribusi Kategori (Pie Chart)
         $categoryData = Kategori::withCount('produks')->get();
         $catLabels = $categoryData->pluck('nama_kategori');
         $catValues = $categoryData->pluck('produks_count');
@@ -55,7 +68,8 @@ class DashboardController extends Controller
             'chartLabels', 'chartData', 
             'cashFlowLabels', 'incomeData', 'expenseData',
             'catLabels', 'catValues',
-            'recentTransaksis'
+            'recentTransaksis',
+            'labaBersih', 'labaKotor', 'totalPengeluaranOperasional'
         ));
     }
 }

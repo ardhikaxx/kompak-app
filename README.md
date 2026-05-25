@@ -24,11 +24,18 @@ Pantau kesehatan finansial bisnis Anda. Selain transaksi penjualan otomatis, And
 Sajikan data bisnis Anda dalam bentuk visual yang mudah dimengerti:
 - **Tren Penjualan:** Grafik pendapatan harian.
 - **Distribusi Kategori:** Komposisi produk berdasarkan kategori.
-- **Laba Rugi:** Perbandingan pemasukan vs pengeluaran.
+- **Analisis Laba Rugi:** Perbandingan pemasukan vs pengeluaran.
+- **Margin Keuntungan:** Penghitungan laba kotor dan laba bersih secara otomatis berdasarkan Harga Pokok Penjualan (HPP).
 - **Ekspor Data:** Unduh laporan dalam format **PDF** atau **Excel (.xlsx)**.
 
 ### 🧠 6. SPK PROMETHEE II (Decision Support)
 Fitur unggulan yang membantu pemilik bisnis menentukan Supplier terbaik. Menggunakan algoritma **PROMETHEE II**, sistem akan meranking alternatif berdasarkan kriteria Harga, Kualitas, Pengiriman, dan Konsistensi.
+
+### 📜 7. Log Aktivitas (Audit Trail)
+Keamanan data terjamin dengan pencatatan otomatis setiap aktivitas krusial (Tambah/Ubah/Hapus). Anda dapat memantau siapa yang melakukan perubahan data, kapan, dan dari perangkat mana.
+
+### 📱 8. Progressive Web App (PWA)
+KOMPAK dapat di-install langsung di HP atau Desktop Anda sebagai aplikasi mandiri. Memberikan akses cepat dari layar utama dan performa yang lebih responsif.
 
 ---
 
@@ -38,10 +45,13 @@ Fitur unggulan yang membantu pemilik bisnis menentukan Supplier terbaik. Menggun
 - **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
 - **UI Framework:** [Bootstrap 5.3](https://getbootstrap.com/) (CDN)
 - **Database:** MySQL / MariaDB
+- **Key Features:**
+  - **PWA Ready:** Manifest & Service Worker integration.
+  - **Audit Logger:** Automatic activity tracking middleware.
+  - **Data Visualization:** Chart.js integration.
 - **Libraries:** 
   - [Chart.js](https://www.chartjs.org/) (Data Visualization)
   - [SweetAlert2](https://sweetalert2.github.io/) (Elegant Alerts)
-  - [Font Awesome 6](https://fontawesome.com/) (Icons)
   - [DomPDF](https://github.com/barryvdh/laravel-dompdf) (PDF Export)
   - [Laravel Excel](https://docs.laravel-excel.com/) (Excel Export)
 

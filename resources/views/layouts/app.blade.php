@@ -15,6 +15,11 @@
     <!-- KOMPAK Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/kompak.css') }}">
     
+    <!-- PWA Support -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="apple-touch-icon" href="https://ui-avatars.com/api/?name=K&background=3b82f6&color=fff&size=180">
+    
     @stack('styles')
 </head>
 <body>
@@ -106,6 +111,18 @@
 
     {{-- Flash Messages → SweetAlert --}}
     @include('layouts.flash-alert')
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(reg => {
+                    console.log('SW registered!', reg);
+                }).catch(err => {
+                    console.log('SW registration failed: ', err);
+                });
+            });
+        }
+    </script>
 
     @stack('scripts')
 </body>
