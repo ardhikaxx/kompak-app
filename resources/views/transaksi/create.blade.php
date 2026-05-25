@@ -87,7 +87,7 @@
                 </div>
 
                 <!-- Scrollable Cart Area -->
-                <div class="flex-grow-1 mb-4" style="overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
+                <div class="flex-grow-1 mb-4" style="min-height: 250px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-md); background: rgba(0,0,0,0.2);">
                     <div id="keranjang-kosong" class="text-center text-white py-5">
                         <i class="fas fa-shopping-basket fa-3x mb-3 opacity-50"></i>
                         <p>Keranjang masih kosong</p>
