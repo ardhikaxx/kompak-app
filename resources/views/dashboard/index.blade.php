@@ -37,9 +37,19 @@
     <div class="col-md-3">
         <div class="glass-card stat-card">
             <div class="stat-icon cyan"><i class="fas fa-hand-holding-usd"></i></div>
-            <div>
+            <div class="w-100">
                 <div class="stat-value fs-5 {{ $labaBersih >= 0 ? 'text-success' : 'text-danger' }}">Rp {{ number_format($labaBersih, 0, ',', '.') }}</div>
                 <div class="stat-label">Laba Bersih (Estimasi)</div>
+                <div class="mt-2 pt-2 border-top border-secondary" style="font-size: 0.65rem;">
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Laba Kotor:</span>
+                        <span class="text-success">+{{ number_format($labaKotor, 0, ',', '.') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Biaya Ops:</span>
+                        <span class="text-danger">-{{ number_format($totalPengeluaranOperasional, 0, ',', '.') }}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
