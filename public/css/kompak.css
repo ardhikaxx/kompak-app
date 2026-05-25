@@ -303,7 +303,7 @@ h5 { font-size: 0.9rem;   font-weight: 500; }
 /* Sidebar */
 .sidebar {
     width: 240px;
-    min-height: 100vh;
+    height: 100vh;
     background: rgba(5, 13, 26, 0.85);
     backdrop-filter: blur(20px);
     border-right: 1px solid var(--glass-border);
@@ -313,6 +313,7 @@ h5 { font-size: 0.9rem;   font-weight: 500; }
     display: flex;
     flex-direction: column;
     transition: var(--transition-base);
+    overflow: hidden;
 }
 
 .sidebar-logo {
