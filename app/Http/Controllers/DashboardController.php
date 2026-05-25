@@ -18,12 +18,31 @@ class DashboardController extends Controller
     {
         $today = Carbon::today();
         
+        // 1. Stat: Total Produk
         $totalProduk = Produk::count();
+        $produkAktif = Produk::where('is_active', true)->count();
+        $produkNonaktif = $totalProduk - $produkAktif;
+
+        // 2. Stat: Penjualan Hari Ini
         $penjualanHariIni = Transaksi::whereDate('tanggal', $today)->sum('total');
-        $stokRendah = Produk::where('stok', '<=', DB::raw('stok_minimum'))->count();
+        $transaksiHariIni = Transaksi::whereDate('tanggal', $today)->count();
+
+        // 3. Stat: Stok Rendah
+        $stokRendah = Produk::where('stok', '<=', DB::raw('stok_minimum'))->where('stok', '>', 0)->count();
+        $stokHabis = Produk::where('stok', '<=', 0)->count();
+        $totalPeringatanStok = $stokRendah + $stokHabis;
+
+        // 4. Stat: Laba
+        $totalPendapatan = Transaksi::sum('total');
+        $totalHpp = DetailTransaksi::join('produks', 'detail_transaksis.produk_id', '=', 'produks.id')
+                    ->sum(DB::raw('produks.harga_beli * detail_transaksis.jumlah'));
+        $labaKotor = $totalPendapatan - $totalHpp;
+        $totalPengeluaranOperasional = Keuangan::where('jenis', 'keluar')->sum('jumlah');
+        $labaBersih = $labaKotor - $totalPengeluaranOperasional;
+
         $totalPelanggan = Pelanggan::count();
 
-        // 1. Data Grafik Penjualan (7 Hari Terakhir)
+        // Data Grafik Penjualan (7 Hari Terakhir)
         $chartLabels = [];
         $chartData = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -32,7 +51,7 @@ class DashboardController extends Controller
             $chartData[] = Transaksi::whereDate('tanggal', $date)->sum('total');
         }
 
-        // 2. Data Grafik Arus Kas (6 Bulan Terakhir)
+        // Data Grafik Arus Kas (6 Bulan Terakhir)
         $cashFlowLabels = [];
         $incomeData = [];
         $expenseData = [];
@@ -43,33 +62,22 @@ class DashboardController extends Controller
             $expenseData[] = Keuangan::where('jenis', 'keluar')->whereMonth('tanggal', $monthDate->month)->whereYear('tanggal', $monthDate->year)->sum('jumlah');
         }
 
-        // 3. Analisis Margin Keuntungan
-        // Rumus Laba Bersih: Sum ( (Harga Jual - Harga Beli) * Qty ) - Pengeluaran Operasional
-        $totalPendapatan = Transaksi::sum('total');
-        
-        // Hitung total HPP (Harga Pokok Penjualan) dari semua detail transaksi
-        $totalHpp = DetailTransaksi::join('produks', 'detail_transaksis.produk_id', '=', 'produks.id')
-                    ->sum(DB::raw('produks.harga_beli * detail_transaksis.jumlah'));
-        
-        $labaKotor = $totalPendapatan - $totalHpp;
-        $totalPengeluaranOperasional = Keuangan::where('jenis', 'keluar')->sum('jumlah');
-        $labaBersih = $labaKotor - $totalPengeluaranOperasional;
-
-        // 4. Data Distribusi Kategori (Pie Chart)
+        // Data Distribusi Kategori (Pie Chart)
         $categoryData = Kategori::withCount('produks')->get();
         $catLabels = $categoryData->pluck('nama_kategori');
         $catValues = $categoryData->pluck('produks_count');
 
-        // Transaksi Terakhir
         $recentTransaksis = Transaksi::with(['pelanggan', 'user'])->latest()->limit(5)->get();
 
         return view('dashboard.index', compact(
-            'totalProduk', 'penjualanHariIni', 'stokRendah', 'totalPelanggan', 
-            'chartLabels', 'chartData', 
+            'totalProduk', 'produkAktif', 'produkNonaktif',
+            'penjualanHariIni', 'transaksiHariIni',
+            'totalPeringatanStok', 'stokRendah', 'stokHabis',
+            'labaBersih', 'labaKotor', 'totalPengeluaranOperasional',
+            'totalPelanggan', 'chartLabels', 'chartData', 
             'cashFlowLabels', 'incomeData', 'expenseData',
             'catLabels', 'catValues',
-            'recentTransaksis',
-            'labaBersih', 'labaKotor', 'totalPengeluaranOperasional'
+            'recentTransaksis'
         ));
     }
 

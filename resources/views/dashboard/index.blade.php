@@ -16,24 +16,49 @@
 </div>
 
 <div class="row g-4 mb-4">
+    <!-- Stat 1: Total Produk -->
     <div class="col-md-3">
         <div class="glass-card stat-card">
             <div class="stat-icon blue"><i class="fas fa-box"></i></div>
-            <div>
+            <div class="w-100">
                 <div class="stat-value">{{ $totalProduk }}</div>
                 <div class="stat-label">Total Produk</div>
+                <div class="mt-2 pt-2 border-top border-secondary" style="font-size: 0.65rem;">
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Aktif:</span>
+                        <span class="text-success">{{ $produkAktif }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Nonaktif:</span>
+                        <span class="text-white">{{ $produkNonaktif }}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Stat 2: Penjualan Hari Ini -->
     <div class="col-md-3">
         <div class="glass-card stat-card">
             <div class="stat-icon green"><i class="fas fa-shopping-cart"></i></div>
-            <div>
+            <div class="w-100">
                 <div class="stat-value fs-5">Rp {{ number_format($penjualanHariIni, 0, ',', '.') }}</div>
                 <div class="stat-label">Penjualan Hari Ini</div>
+                <div class="mt-2 pt-2 border-top border-secondary" style="font-size: 0.65rem;">
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Total Transaksi:</span>
+                        <span class="text-white">{{ $transaksiHariIni }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Rata-rata:</span>
+                        <span class="text-accent">Rp {{ $transaksiHariIni > 0 ? number_format($penjualanHariIni / $transaksiHariIni, 0, ',', '.') : 0 }}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Stat 3: Laba Bersih -->
     <div class="col-md-3">
         <div class="glass-card stat-card">
             <div class="stat-icon cyan"><i class="fas fa-hand-holding-usd"></i></div>
@@ -53,12 +78,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Stat 4: Peringatan Stok -->
     <div class="col-md-3">
         <div class="glass-card stat-card">
             <div class="stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
-            <div>
-                <div class="stat-value">{{ $stokRendah }}</div>
-                <div class="stat-label">Stok Rendah</div>
+            <div class="w-100">
+                <div class="stat-value">{{ $totalPeringatanStok }}</div>
+                <div class="stat-label">Stok Masalah</div>
+                <div class="mt-2 pt-2 border-top border-secondary" style="font-size: 0.65rem;">
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Stok Habis:</span>
+                        <span class="text-danger fw-bold">{{ $stokHabis }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-white opacity-50">
+                        <span>Stok Rendah:</span>
+                        <span class="text-warning">{{ $stokRendah }}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,13 +104,13 @@
 <div class="row g-4 mb-4">
     <div class="col-lg-8">
         <div class="glass-card p-4 h-100">
-            <h5 class="mb-4 text-white"><i class="fas fa-chart-line me-2 text-accent"></i> Tren Penjualan 7 Hari</h5>
+            <h5 class="text-white mb-4"><i class="fas fa-chart-line me-2 text-accent"></i> Tren Penjualan 7 Hari</h5>
             <canvas id="salesChart" height="110"></canvas>
         </div>
     </div>
     <div class="col-lg-4">
         <div class="glass-card p-4 h-100">
-            <h5 class="mb-4 text-white"><i class="fas fa-chart-pie me-2 text-accent"></i> Distribusi Kategori</h5>
+            <h5 class="text-white mb-4"><i class="fas fa-chart-pie me-2 text-accent"></i> Distribusi Kategori</h5>
             <canvas id="categoryChart"></canvas>
         </div>
     </div>
@@ -82,13 +119,13 @@
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="glass-card p-4 h-100">
-            <h5 class="mb-4 text-white"><i class="fas fa-exchange-alt me-2 text-accent"></i> Arus Kas (6 Bulan Terakhir)</h5>
+            <h5 class="text-white mb-4"><i class="fas fa-exchange-alt me-2 text-accent"></i> Arus Kas (6 Bulan Terakhir)</h5>
             <canvas id="cashFlowChart" height="110"></canvas>
         </div>
     </div>
     <div class="col-lg-4">
         <div class="glass-card p-4 h-100">
-            <h5 class="mb-4 text-white"><i class="fas fa-receipt me-2 text-accent"></i> Transaksi Terakhir</h5>
+            <h5 class="text-white mb-4"><i class="fas fa-receipt me-2 text-accent"></i> Transaksi Terakhir</h5>
             @if($recentTransaksis->isEmpty())
                 <div class="text-white text-center py-5">
                     <i class="fas fa-receipt fa-3x mb-3"></i>
@@ -148,7 +185,7 @@
                     borderWidth: 0
                 }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 15 } } }, cutout: '70%' }
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 15, color: '#fff' } } }, cutout: '70%' }
         });
 
         // Cash Flow Chart
