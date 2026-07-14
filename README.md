@@ -1,4 +1,4 @@
-# 🚀 KOMPAK — UMKM Management System
+﻿# 🚀 KOMPAK — UMKM Management System
 
 **KOMPAK** (*Kontrol Operasional Manajemen Penjualan dan Analisis Keputusan*) adalah platform manajemen bisnis terintegrasi yang dirancang khusus untuk membantu pelaku UMKM mengelola operasional harian, memantau keuangan, hingga mengambil keputusan strategis menggunakan bantuan AI.
 
@@ -122,7 +122,7 @@ Jika project ini bermanfaat, Anda dapat mendukung pengembangan selanjutnya melal
 
 <div align="center">
 
-![QRIS](public/assets/qris.png)
+<img src="public/assets/qris.png" alt="QRIS" width="250" />
 
 **Scan QRIS di atas untuk berdonasi**
 
