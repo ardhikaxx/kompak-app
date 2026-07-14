@@ -114,3 +114,21 @@ Proyek ini menggunakan filosofi **Glassmorphism Dark Theme** dengan efek blur tr
 ---
 
 *Dikembangkan dengan ❤️ untuk kemajuan UMKM Indonesia.*
+
+
+## Donasi
+
+Jika project ini bermanfaat, Anda dapat mendukung pengembangan selanjutnya melalui donasi:
+
+<div align="center">
+
+![QRIS](public/assets/qris.png)
+
+**Scan QRIS di atas untuk berdonasi**
+
+Setiap donasi akan digunakan untuk:
+- Pengembangan fitur baru
+- Perbaikan bug & maintenance
+- Infrastruktur server
+
+</div>
